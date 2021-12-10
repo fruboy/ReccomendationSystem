@@ -5,7 +5,7 @@ from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
 import flask
 from flask import request, jsonify
-
+import os
 from sklearn import preprocessing
 from sklearn.naive_bayes import GaussianNB
 #from sklearn.tree import DecisionTreeClassifier
@@ -99,7 +99,9 @@ def api_salon():
     result_json = {"category":result[0]}
     return jsonify(result_json)
 
-app.run(port=1200)
+port = int(os.getenv('PORT'))
+print("Starting app on port %d" % port)
+app.run(debug=False, port=port, host='0.0.0.0')
     
 
 #res1 = res1['antecedents'].apply(lambda x: ', '.join(list(x))).astype("unicode")
